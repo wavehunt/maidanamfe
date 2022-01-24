@@ -28,8 +28,8 @@ class GoogleAuth extends React.Component {
                         'scope': 'profile',
                         
                         'ux_mode': 'redirect',
-                        //'redirect_uri':'https://maidanamreact.herokuapp.com'
-                        'redirect_uri':'http://localhost:3000'
+                        'redirect_uri':'https://maidanamreact.herokuapp.com'
+                        //'redirect_uri':'http://localhost:3000'
                         
                         })
                         .then((result)=> {
