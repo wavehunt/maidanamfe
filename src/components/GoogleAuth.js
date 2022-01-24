@@ -11,6 +11,9 @@ class GoogleAuth extends React.Component {
             window.gapi.load('client:auth2', async () => {
                 //alert('load done');
                 alert(window.gapi.client);
+
+                await setTimeout(() => {
+
                 window.gapi.client.init({
                 'clientId': '515718912201-5o9h09qa20j5vsl1t7gunc9917ad6kck.apps.googleusercontent.com',
                 'scope': 'profile',
@@ -18,14 +21,15 @@ class GoogleAuth extends React.Component {
                 'ux_mode': 'redirect',
                 'redirect_uri':'https://maidanamreact.herokuapp.com'
                 
-                });
+                })
 
-                //.then(()=> {
+                .then(()=> {
 
-                    //alert('ínit done');
+                    alert('ínit done');
                     
                     //const testAuth = gAuth;
-                    this.auth = window.gapi.auth2.getAuthInstance();                    
+                
+                        this.auth = window.gapi.auth2.getAuthInstance();                    
                     //this.setState({auth:gapiAuth});
                     //setup listener for sign-in changes
                     this.auth.isSignedIn.listen(this.handleAuthChange);
@@ -33,8 +37,11 @@ class GoogleAuth extends React.Component {
                     //handle initial state
                     this.handleAuthChange(this.auth.isSignedIn.get());
                     console.log(this.auth);
-                //})
-                //.catch(()=> console.log('load failed'));
+                    
+                    
+                })
+                .catch(()=> console.log('load failed'));
+                 }, 100);
             });
             
 
@@ -51,7 +58,7 @@ class GoogleAuth extends React.Component {
     //respond to sign-in changes
     handleAuthChange = (userLoggedIn) => {
         alert (userLoggedIn);
-        
+
         if(userLoggedIn) {
             //setIsSignedIn(true);
             this.setState({isSignedIn:true})
