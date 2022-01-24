@@ -8,42 +8,68 @@ class GoogleAuth extends React.Component {
     //load and initialize the gapi on component load
     componentDidMount () {
             
-            window.gapi.load('client:auth2', async () => {
-                //alert('load done');
-                alert(window.gapi.client);
-
-                await setTimeout(() => {
-
-                window.gapi.client.init({
-                'clientId': '515718912201-5o9h09qa20j5vsl1t7gunc9917ad6kck.apps.googleusercontent.com',
-                'scope': 'profile',
+        const gapiLoadInit = () => {            
+            let script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://apis.google.com/js/api.js'
+            script.onload = () => {
+              window.gapi.load('client:auth2', async () => {
+                console.log('gapi loaded');
+                alert('gapi loaded');
+                const initApi = () => {
+                   if (!window.gapi.client) {
+                     console.log('client not present');
+                     alert('client not present');
+                     return;
+                   }
+                   if (!window.gapi.auth2.getAuthInstance()) {
+                    window.gapi.client.init({
+                        'clientId': '515718912201-5o9h09qa20j5vsl1t7gunc9917ad6kck.apps.googleusercontent.com',
+                        'scope': 'profile',
+                        
+                        'ux_mode': 'redirect',
+                        //'redirect_uri':'https://maidanamreact.herokuapp.com'
+                        'redirect_uri':'http://localhost:3000'
+                        
+                        })
+                        .then((result)=> {
+                          console.log("gapi init done");
+                          alert("gapi init done");
+                          console.log("result: ", result);
+    
+                          this.auth = window.gapi.auth2.getAuthInstance();                    
+                            //setup listener for sign-in changes
+                            this.auth.isSignedIn.listen(this.handleAuthChange);
                 
-                'ux_mode': 'redirect',
-                'redirect_uri':'https://maidanamreact.herokuapp.com'
-                
-                })
+                            //handle initial state
+                            this.handleAuthChange(this.auth.isSignedIn.get());
+                            console.log(this.auth);
+                        })
+                        .catch(e=> {
+                          console.log("error in init ", e);
+                        })
 
-                .then(()=> {
-
-                    alert('ínit done');
-                    
-                    //const testAuth = gAuth;
-                
-                        this.auth = window.gapi.auth2.getAuthInstance();                    
-                    //this.setState({auth:gapiAuth});
+                   } else {
+                    this.auth = window.gapi.auth2.getAuthInstance();                    
                     //setup listener for sign-in changes
                     this.auth.isSignedIn.listen(this.handleAuthChange);
-            
+        
                     //handle initial state
                     this.handleAuthChange(this.auth.isSignedIn.get());
                     console.log(this.auth);
-                    
-                    
-                })
-                .catch(()=> console.log('load failed'));
-                 }, 100);
-            });
-            
+                   }
+                   
+                }
+                setTimeout(initApi,100);
+              })
+
+
+            }
+
+        document.getElementsByTagName('head')[0].appendChild(script)
+          }
+      
+          gapiLoadInit();
 
     }
     
@@ -74,7 +100,7 @@ class GoogleAuth extends React.Component {
         alert('çlicked: ' + this.auth );
         //console.log('auth: ', auth)
         if(this && this.auth) {
-            this.auth.signIn();
+            console.log(this.auth.signIn());
         }
     }
     onSignOutClick = () => {
