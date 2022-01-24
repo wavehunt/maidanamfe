@@ -9,22 +9,22 @@ class GoogleAuth extends React.Component {
     componentDidMount () {
             
             window.gapi.load('client:auth2', async () => {
-                alert('load done');
+                //alert('load done');
                 alert(window.gapi.client);
-                const gAuth = window.gapi.client.init({
+                window.gapi.client.init({
                 'clientId': '515718912201-5o9h09qa20j5vsl1t7gunc9917ad6kck.apps.googleusercontent.com',
                 'scope': 'profile',
-                /*
+                
                 'ux_mode': 'redirect',
-                'redirect_uri':'http://localhost:3000'
-                */
+                'redirect_uri':'https://maidanamreact.herokuapp.com'
+                
                 });
 
                 //.then(()=> {
 
-                    alert('ínit done');
+                    //alert('ínit done');
                     
-                    const testAuth = gAuth;
+                    //const testAuth = gAuth;
                     this.auth = window.gapi.auth2.getAuthInstance();                    
                     //this.setState({auth:gapiAuth});
                     //setup listener for sign-in changes
@@ -37,18 +37,6 @@ class GoogleAuth extends React.Component {
                 //.catch(()=> console.log('load failed'));
             });
             
-            
-            //new code
-            /*
-            const gapiAuth = window.gapi.auth2.getAuthInstance() || null;
-            this.setState({auth:gapiAuth});
-            //setup listener for sign-in changes
-            gapiAuth.isSignedIn.listen(this.handleAuthChange);
-        
-            //handle initial state
-            this.handleAuthChange(gapiAuth.isSignedIn.get());
-            console.log(this.state.auth);
-            */
 
     }
     
