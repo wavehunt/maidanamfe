@@ -50,6 +50,8 @@ class GoogleAuth extends React.Component {
 
     //respond to sign-in changes
     handleAuthChange = (userLoggedIn) => {
+        alert (userLoggedIn);
+        
         if(userLoggedIn) {
             //setIsSignedIn(true);
             this.setState({isSignedIn:true})
