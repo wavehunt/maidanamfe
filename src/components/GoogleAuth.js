@@ -32,6 +32,11 @@ const GoogleAuth = () => {
                 onFailure={responseGoogle}
                 cookiePolicy='single_host_origin'
                 isSignedIn={true}
+                
+                uxMode='redirect'
+                //redirectUri='http://localhost:3000'
+                redirectUri='https://maidanamreact.herokuapp.com'
+
             /> :
             <GoogleLogout
                 clientId='515718912201-5o9h09qa20j5vsl1t7gunc9917ad6kck.apps.googleusercontent.com'
