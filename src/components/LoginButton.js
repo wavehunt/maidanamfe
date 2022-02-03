@@ -11,6 +11,16 @@ const LoginButton = () => {
       //          onSuccess={responseGoogle}
         //        onFailure={responseGoogle}
                 cookiePolicy='single_host_origin'
+                render={renderProps=> (
+                    <button onClick={renderProps.onClick}
+                            disabled={renderProps.disabled}
+                            className='ui button'
+                            style={{background:'#4285F4',color:'#FFFFFF'}}
+                    >
+                        <i className="google icon"/>                        
+                        Login
+                    </button>
+                )}
                 isSignedIn={true}
                 uxMode='redirect'
                 redirectUri={REDIRECT_URL}

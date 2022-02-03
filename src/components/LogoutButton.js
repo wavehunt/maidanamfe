@@ -14,12 +14,19 @@ const LogoutButton = ({signOut,redirectTo,isSignedIn}) => {
     }
 
     //const navigate = useNavigate();
-
+    //style={{background:'#4285F4',color:'#FFFFFF'}}
     return (
         <GoogleLogout
                 clientId={GOOGLE_CLIENT_ID}
                 buttonText='Logout'
                 onLogoutSuccess={()=> logout()}
+                render={renderProps=> (
+                    <button onClick={renderProps.onClick}
+                            disabled={renderProps.disabled}
+                            className='ui grey button'
+                    >   Logout
+                    </button>
+                )}
             />
     )
 }
