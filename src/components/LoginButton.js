@@ -11,7 +11,7 @@ const LoginButton = () => {
       //          onSuccess={responseGoogle}
         //        onFailure={responseGoogle}
                 cookiePolicy='single_host_origin'
-                //isSignedIn={true}
+                isSignedIn={true}
                 uxMode='redirect'
                 redirectUri={REDIRECT_URL}
                 //redirectUri='https://maidanamreact.herokuapp.com'
