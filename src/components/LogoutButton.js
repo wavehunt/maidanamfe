@@ -9,11 +9,9 @@ const LogoutButton = ({signOut,redirectTo,isSignedIn}) => {
 
     const logout = () => {
         console.log('user logged out');
-        //setIsSignedIn(false);
         signOut();
     }
 
-    //const navigate = useNavigate();
     //style={{background:'#4285F4',color:'#FFFFFF'}}
     return (
         <GoogleLogout
@@ -30,9 +28,10 @@ const LogoutButton = ({signOut,redirectTo,isSignedIn}) => {
             />
     )
 }
-
+/*
 const mapStateToProps = state => {
     return state.auth;
 }
+*/
 
 export default connect(null,{signOut})(LogoutButton);
